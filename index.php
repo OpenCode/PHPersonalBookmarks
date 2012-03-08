@@ -38,7 +38,7 @@
 		}
 
 	function create_delete_link($link_id){
-		return '<a href=./index.php?del=' . ($link_id + 1) . '> X </a>';
+		return '<a href=./index.php?del=' . ($link_id + 1) . '><img src="images/trash.png" /></a>';
 		}
 
 	include "class/password_protect.php";
