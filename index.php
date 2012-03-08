@@ -38,7 +38,20 @@
 		}
 
 	function create_delete_link($link_id){
-		return '<a href=./index.php?del=' . ($link_id + 1) . '><img src="images/trash.png" /></a>';
+		return 'index.php?del=' . ($link_id + 1);
+		}
+
+	function create_line($id, $link, $text, $description, $tags){
+		return '<tr> 
+			<td><input type="checkbox"></td> 
+			<td>' . create_link($link, $text) . '</td> 
+			<td>' . $description . '</td> 
+			<td>' . get_tag($tags) . '</td> 
+			<td>
+				<a href="#"><img src="images/icn_edit.png" /></a>
+				<a href="' . create_delete_link($id) . '"><img src="images/icn_trash.png" /></a>
+			</td> 
+		</tr>';
 		}
 
 	include "class/password_protect.php";
@@ -56,7 +69,8 @@
 		for ($i = 0; $i <= count($links); $i++) {
 			$link = explode("|", $links[$i]);
 			if ($link[0] != ''){
-				$message .= create_delete_link($i) . create_link($link[0], $link[1]) . ' [' . $link[2] . '] - ' . get_tag($link[3]) . '<br/>';
+				#$message .= create_delete_link($i) . create_link($link[0], $link[1]) . ' [' . $link[2] . '] - ' . get_tag($link[3]) . '<br/>';
+				$message .= create_line($i, $link[0], $link[1], $link[2], $link[3]);
 				}
 		}
 	} else {
@@ -67,7 +81,7 @@
 	$template = fopen('template.html', 'r');
 	$dim = filesize('template.html');
 	$complete_template = fread($template, $dim);
-	$complete_template = str_replace('{{LISTA_LINKS}}', $message, $complete_template);
+	$complete_template = str_replace('{{LINKS_LIST}}', $message, $complete_template);
 	fclose($template);
 	echo $complete_template;
 
