@@ -56,7 +56,7 @@
 		}
 
 	function show_template($content){
-		// POPOLA IL TEMPLATE E LO MOSTRA
+		// fiil the template and show it
 		$template = fopen('template.html', 'r');
 		$dim = filesize('template.html');
 		$complete_template = fread($template, $dim);
