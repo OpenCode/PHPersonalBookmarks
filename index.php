@@ -50,6 +50,7 @@
 			<td>
 				<a href="#"><img src="images/icn_edit.png" /></a>
 				<a href="' . create_delete_link($id) . '"><img src="images/icn_trash.png" /></a>
+				<a target="_blank" href="http://www.addthis.com/bookmark.php?url=' . $link . '&title=' . $text . '&description=' . $description . '"><img src="images/icn_jump_back.png" /></a>
 			</td> 
 		</tr>';
 		}
@@ -144,7 +145,7 @@
 	// Create the new link line in link list
 	if (isset($_POST) && $_POST['name'] != ''){
 		$handle = fopen('link.list', 'a+');
-		$data = $_POST['url'] . '|' . $_POST['name'] . '|' . $_POST['description'] . '|' . $_POST['tags'];
+		$data = "\n" . $_POST['url'] . '|' . $_POST['name'] . '|' . $_POST['description'] . '|' . $_POST['tags'];
 		fwrite($handle, $data);
 		fclose($handle);
 		$message .= '<h4 class="alert_success">Link for ' . $_POST['name'] . ' created</h4>';
