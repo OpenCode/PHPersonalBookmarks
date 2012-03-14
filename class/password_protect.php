@@ -136,15 +136,6 @@ if (isset($_POST['access_password'])) {
   }
   else {
 
-//set log path
-$log_path = "../parameters/login.log";
-// set moment date and hour
-$data = date ("d-m-Y H:i:s");
-// write the file
-$fh = fopen($log_path, 'w');
-fwrite($fh, '[' . $login . '] ' . $data);
-fclose($fh);
-
     // set cookie if password was validated
     setcookie("verify", md5($login.'%'.$pass), $timeout, '/');
 

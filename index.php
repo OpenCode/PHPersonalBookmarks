@@ -48,9 +48,10 @@
 			<td>' . $description . '</td> 
 			<td>' . get_tag($tags) . '</td> 
 			<td>
-				<a href="#"><img src="images/icn_edit.png" /></a>
+				<!--a href="#"><img src="images/icn_edit.png" /></a-->
+				<a rel="gb_pageset[link]" href="' . $link . '"><img src="images/icn_photo.png" /></a>
 				<a href="' . create_delete_link($id) . '"><img src="images/icn_trash.png" /></a>
-				<a target="_blank" href="http://www.addthis.com/bookmark.php?url=' . $link . '&title=' . $text . '&description=' . $description . '"><img src="images/icn_jump_back.png" /></a>
+				<a rel="gb_pageset[share_link]" href="http://www.addthis.com/bookmark.php?url=' . $link . '&title=' . $text . '&description=' . $description . '"><img src="images/icn_jump_back.png" /></a>
 			</td> 
 		</tr>';
 		}
