@@ -43,7 +43,7 @@
 
 	function create_line($id, $link, $text, $description, $tags){
 		return '<tr> 
-			<td><input type="checkbox"></td> 
+			<td><!--input type="checkbox"--></td> 
 			<td>' . create_link($link, $text) . '</td> 
 			<td>' . $description . '</td> 
 			<td>' . get_tag($tags) . '</td> 
