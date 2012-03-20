@@ -57,11 +57,37 @@
 		}
 
 	function show_template($content){
-		// fiil the template and show it
+		// Found the language dict
+		$lang = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+		$file_dict = "class/lang/" . substr($lang, 0, 2) . ".php";
+		if (file_exists($file_dict)) {
+			include "class/lang/" . substr($lang, 0, 2) . ".php";
+			}
+		else {
+			include "class/lang/en.php";
+			}
+		//echo ;
+		// fill the template and show it
 		$template = fopen('template.html', 'r');
 		$dim = filesize('template.html');
 		$complete_template = fread($template, $dim);
+		// Language replace
+		$complete_template = str_replace('{{STRING_ADMINISTRATION}}', $DICT['Administration'], $complete_template);
+		$complete_template = str_replace('{{STRING_ADMINISTRATOR}}', $DICT['Administrator'], $complete_template);
+		$complete_template = str_replace('{{STRING_LINK_LIST}}', $DICT['LinkList'], $complete_template);
+		$complete_template = str_replace('{{STRING_CREATE_LINK}}', $DICT['CreateList'], $complete_template);
+		$complete_template = str_replace('{{STRING_SUPPORT}}', $DICT['Support'], $complete_template);
+		$complete_template = str_replace('{{STRING_USER}}', $DICT['User'], $complete_template);
+		$complete_template = str_replace('{{STRING_DEVELOPER_SITE}}', $DICT['DeveloperSite'], $complete_template);
+		$content = str_replace('{{STRING_NEW_LINK}}', $DICT['NewLink'], $content);
+		$content = str_replace('{{STRING_NAME}}', $DICT['Name'], $content);
+		$content = str_replace('{{STRING_SEPARATED_BY_COMMA}}', $DICT['SeparatedByComma'], $content);
+		$content = str_replace('{{STRING_DESCRIPTION}}', $DICT['Description'], $content);
+		$content = str_replace('{{STRING_ACTION}}', $DICT['Action'], $content);
+		$content = str_replace('{{STRING_SAVE}}', $DICT['Save'], $content);
+		// Dynamic content replace
 		$complete_template = str_replace('{{CONTENT}}', $content, $complete_template);
+		// Return template
 		fclose($template);
 		return $complete_template;
 		}
@@ -69,29 +95,29 @@
 	function show_new_link_form(){
 		$content = '<article class="module width_full">
 			<form name="new_link" method="POST" action=".">
-			<header><h3>New Link</h3></header>
+			<header><h3>{{STRING_NEW_LINK}}</h3></header>
 				<div class="module_content">
 							<fieldset>
 								<label>URL</label>
 								<input type="text" name="url">
 							</fieldset>
 							<fieldset>
-								<label>Name</label>
+								<label>{{STRING_NAME}}</label>
 								<input type="text" name="name">
 							</fieldset>
 							<fieldset>
-								<label>Description</label>
+								<label>{{STRING_DESCRIPTION}}</label>
 								<textarea name="description" rows="12"></textarea>
 							</fieldset>
 							<fieldset>
-								<label>Tags (Separated by comma)</label>
+								<label>Tags ({{STRING_SEPARATED_BY_COMMA}})</label>
 								<input type="text" name="tags">
 							</fieldset>
 						<div class="clear"></div>
 				</div>
 			<footer>
 				<div class="submit_link">
-					<input type="submit" value="Save" class="alt_btn">
+					<input type="submit" value="{{STRING_SAVE}}" class="alt_btn">
 				</div>
 			</footer>
 			</form>
@@ -111,9 +137,9 @@
 					<tr> 
 						<th></th> 
 						<th>URL</th> 
-						<th>Description</th> 
+						<th>{{STRING_DESCRIPTION}}</th> 
 						<th>Tags</th> 
-						<th>Action</th> 
+						<th>{{STRING_ACTION}}</th> 
 					</tr> 
 				</thead> 
 				<tbody> ' . $content_link . '</tbody> 
@@ -174,7 +200,5 @@
 		echo $content;
 		return;
 	}
-
-	
 
 ?>

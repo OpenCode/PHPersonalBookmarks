@@ -4,8 +4,8 @@
 $(document).ready(function() {
 
 // choose text for the show/hide link - can contain HTML (e.g. an image)
-var showText='Show';
-var hideText='Hide';
+var showText='[ + ]';
+var hideText='[ - ]';
 
 // initialise the visibility check
 var is_visible = false;
