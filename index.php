@@ -60,13 +60,14 @@
 		// Found the language dict
 		$lang = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
 		$file_dict = "class/lang/" . substr($lang, 0, 2) . ".php";
-		if (file_exists($file_dict)) {
-			include "class/lang/" . substr($lang, 0, 2) . ".php";
+		$valid_langs = array("en","it");
+		if ((file_exists($file_dict)) && (in_array(substr($lang, 0, 2), $valid_langs))) {
+		//if (file_exists($file_dict)) {
+			include_once "class/lang/" . substr($lang, 0, 2) . ".php";
 			}
 		else {
-			include "class/lang/en.php";
+			include_once "class/lang/en.php";
 			}
-		//echo ;
 		// fill the template and show it
 		$template = fopen('template.html', 'r');
 		$dim = filesize('template.html');
