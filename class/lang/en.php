@@ -15,6 +15,7 @@ $DICT = array(
   'SeparatedByComma' => 'Separated by comma',
   'Save' => 'Save',
   'NewLink' => 'NewLink',
+  'ChangeApiCode' => 'Please, for your security change your API Code',
 );
 
 

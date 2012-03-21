@@ -15,6 +15,7 @@ $DICT = array(
   'SeparatedByComma' => 'Separate da virgola',
   'Save' => 'Salva',
   'NewLink' => 'Nuovo Link',
+  'ChangeApiCode' => 'Attenzione, per motivi di sicurezza modificare il codice API',
 );
 
 

@@ -68,6 +68,10 @@
 		else {
 			include_once "class/lang/en.php";
 			}
+		include_once "api/code.php";
+		if (in_array('asdfghjkl123456789', $CODE)) {
+			$content = '<h4 class="alert_warning">{{STRING_CHANGE_API_CODE}}</h4>' . $content;
+		}
 		// fill the template and show it
 		$template = fopen('template.html', 'r');
 		$dim = filesize('template.html');
@@ -80,6 +84,7 @@
 		$complete_template = str_replace('{{STRING_SUPPORT}}', $DICT['Support'], $complete_template);
 		$complete_template = str_replace('{{STRING_USER}}', $DICT['User'], $complete_template);
 		$complete_template = str_replace('{{STRING_DEVELOPER_SITE}}', $DICT['DeveloperSite'], $complete_template);
+		$content = str_replace('{{STRING_CHANGE_API_CODE}}', $DICT['ChangeApiCode'], $content);
 		$content = str_replace('{{STRING_NEW_LINK}}', $DICT['NewLink'], $content);
 		$content = str_replace('{{STRING_NAME}}', $DICT['Name'], $content);
 		$content = str_replace('{{STRING_SEPARATED_BY_COMMA}}', $DICT['SeparatedByComma'], $content);
@@ -87,6 +92,7 @@
 		$content = str_replace('{{STRING_ACTION}}', $DICT['Action'], $content);
 		$content = str_replace('{{STRING_SAVE}}', $DICT['Save'], $content);
 		// Dynamic content replace
+		$complete_template = str_replace('{{API_CODE}}', $CODE[0], $complete_template);
 		$complete_template = str_replace('{{CONTENT}}', $content, $complete_template);
 		// Return template
 		fclose($template);
