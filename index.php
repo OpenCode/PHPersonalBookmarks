@@ -59,7 +59,7 @@
 	function show_template($content){
 		// Found the language dict
 		$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-		$valid_langs = array('en','es','it');
+		$valid_langs = array('en','es','fr','it');
 		$file_dict = 'class/lang/' . $lang . '.php';
 		if ( !(file_exists($file_dict)) || !(in_array($lang, $valid_langs))) {
 			$file_dict = 'class/lang/en.php';
