@@ -13,5 +13,5 @@ With PHPersonalBookmarks you can:
 
 Follow the project on Diaspora* or the developer's blog
 
-[Diaspora](https://joindiaspora.com/tags/phpersonalbookmarks)
-[Blog](http://soluzionisoftware.blogspot.it/search/label/PHPersonalBookmarks)
+* [Diaspora](https://joindiaspora.com/tags/phpersonalbookmarks)
+* [Blog](http://soluzionisoftware.blogspot.it/search/label/PHPersonalBookmarks)
