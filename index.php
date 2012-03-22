@@ -58,17 +58,14 @@
 
 	function show_template($content){
 		// Found the language dict
-		$lang = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
-		$file_dict = "class/lang/" . substr($lang, 0, 2) . ".php";
-		$valid_langs = array("en","it");
-		if ((file_exists($file_dict)) && (in_array(substr($lang, 0, 2), $valid_langs))) {
-		//if (file_exists($file_dict)) {
-			include_once "class/lang/" . substr($lang, 0, 2) . ".php";
-			}
-		else {
-			include_once "class/lang/en.php";
-			}
-		include_once "api/code.php";
+		$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+		$valid_langs = array('en','es','it');
+		$file_dict = 'class/lang/' . $lang . '.php';
+		if ( !(file_exists($file_dict)) || !(in_array($lang, $valid_langs))) {
+			$file_dict = 'class/lang/en.php';
+		}
+		include_once $file_dict;
+		include_once 'api/code.php';
 		if (in_array('asdfghjkl123456789', $CODE)) {
 			$content = '<h4 class="alert_warning">{{STRING_CHANGE_API_CODE}}</h4>' . $content;
 		}
