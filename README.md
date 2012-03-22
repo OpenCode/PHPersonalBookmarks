@@ -10,3 +10,8 @@ With PHPersonalBookmarks you can:
 * Show site in a modal box
 * Share link with your friend on a lot of social network
 * Traslated: Italian, English
+
+Follow the project on Diaspora* or the developer's blog
+
+[Diaspora](https://joindiaspora.com/tags/phpersonalbookmarks)
+[Blog](http://soluzionisoftware.blogspot.it/search/label/PHPersonalBookmarks)
