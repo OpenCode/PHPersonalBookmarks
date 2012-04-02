@@ -188,11 +188,45 @@
 		$linklistdim = filesize('link.list');
 		$complete_linklist = fread($linklist, $linklistdim);
 		$links = explode("\n", $complete_linklist);
-		$content_link = '';
+		$content_link = '<form name="filter" method="GET" action=".">
+			<tr>
+				<td><img src="images/icn_search.png" /></td><td><input type="text" name="filter_url" value="' . $_GET['filter_url'] . '"></td>
+				<td><input type="text" name="filter_description" value="' . $_GET['filter_description'] . '"></td>
+				<td><input type="text" name="filter_tag" value="' . $_GET['filter_tag'] . '"></td>
+				<td><input type="submit" value="Filter" class="alt_btn"></td>
+			</tr>
+			</form>';
 		for ($i = 0; $i <= count($links); $i++) {
 			$link = explode("|", $links[$i]);
 			if ($link[0] != ''){
-				$content_link .= create_line($i, $link[0], $link[1], $link[2], $link[3]);
+				$ok = false;
+				if (isset($_GET['filter_url']) && $_GET['filter_url'] != '') {
+					if (strpos(strtolower($link[0]), strtolower($_GET['filter_url']))){
+						$ok = true;
+						}
+					elseif (strpos(strtolower($link[1]), strtolower($_GET['filter_url']))){
+						$ok = true;
+						}
+					}
+				elseif (isset($_GET['filter_description']) && $_GET['filter_description'] != '') {
+					if (strpos(strtolower($link[2]), strtolower($_GET['filter_description']))){
+						$ok = true;
+						}
+					}
+				elseif (isset($_GET['filter_tag']) && $_GET['filter_tag'] != '') {
+					if (strpos(strtolower($link[3]), strtolower($_GET['filter_tag']))){
+						$ok = true;
+						}
+					}
+				elseif (!isset($_GET['filter_url']) && !isset($_GET['filter_description']) && !isset($_GET['filter_tag'])){
+					$ok = true;
+					}
+				elseif ($_GET['filter_url'] == '' && $_GET['filter_description'] == '' && $_GET['filter_tag'] == ''){
+					$ok = true;
+					}
+				if ($ok == true){
+					$content_link .= create_line($i, $link[0], $link[1], $link[2], $link[3]);
+					}
 				}
 			}
 		$content .= show_link_list($content_link, $message);
