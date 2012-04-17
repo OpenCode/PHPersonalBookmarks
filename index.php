@@ -136,8 +136,17 @@
 			</header>
 			<div class="tab_container">
 				<div id="tab1" class="tab_content">
-				<table class="tablesorter" cellspacing="0"> 
-				<thead> 
+				<form name="filter" method="GET" action=".">
+				<table class="tablesorter" cellspacing="0">
+				<thead>
+					<tr>
+						<td class="filtri"><img src="images/icn_search.png" /></td>
+						<td class="filtri"><input type="text" name="filter_url" value="' . $_GET['filter_url'] . '"></td>
+						<td class="filtri"><input type="text" name="filter_description" value="' . $_GET['filter_description'] . '"></td>
+						<td class="filtri"><input type="text" name="filter_tag" value="' . $_GET['filter_tag'] . '"></td>
+						<td class="filtri"><input type="submit" value="Filter" class="alt_btn"></td>
+					</tr>
+					
 					<tr> 
 						<th></th> 
 						<th>URL</th> 
@@ -148,6 +157,7 @@
 				</thead> 
 				<tbody> ' . $content_link . '</tbody> 
 				</table>
+				</form>
 				</div><!-- end of #tab1 -->
 			</div><!-- end of .tab_container -->
 		</article><!-- end of content manager article -->';
@@ -188,14 +198,7 @@
 		$linklistdim = filesize('link.list');
 		$complete_linklist = fread($linklist, $linklistdim);
 		$links = explode("\n", $complete_linklist);
-		$content_link = '<form name="filter" method="GET" action=".">
-			<tr>
-				<td><img src="images/icn_search.png" /></td><td><input type="text" name="filter_url" value="' . $_GET['filter_url'] . '"></td>
-				<td><input type="text" name="filter_description" value="' . $_GET['filter_description'] . '"></td>
-				<td><input type="text" name="filter_tag" value="' . $_GET['filter_tag'] . '"></td>
-				<td><input type="submit" value="Filter" class="alt_btn"></td>
-			</tr>
-			</form>';
+		$content_link = '';
 		for ($i = 0; $i <= count($links); $i++) {
 			$link = explode("|", $links[$i]);
 			if ($link[0] != ''){

@@ -512,6 +512,10 @@ cursor: pointer;
 padding: 15px 10px;
 }
 
+.tablesorter thead tr .filtri{
+padding: 0px 0px;
+}
+
 .tablesorter input[type=image] {
 margin-right: 10px;}
 
