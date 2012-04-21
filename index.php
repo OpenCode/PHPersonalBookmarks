@@ -40,6 +40,10 @@
 	function create_delete_link($link_id){
 		return 'index.php?del=' . ($link_id + 1);
 		}
+		
+	function create_edit_link($link_id){
+		return 'index.php?edit=' . ($link_id + 1);
+		}
 
 	function create_line($id, $link, $text, $description, $tags){
 		return '<tr> 
@@ -51,6 +55,7 @@
 				<!--a href="#"><img src="images/icn_edit.png" /></a-->
 				<a href="' . $link . '" toptions="title = ' . $text . ', shaded = 1, type = iframe, effect = fade, width = 1000, height = 600, x = 10, y = 10 layout = flatlook"><img src="images/icn_photo.png" /></a>
 				<a href="' . create_delete_link($id) . '"><img src="images/icn_trash.png" /></a>
+				<a href="' . create_edit_link($id) . '"><img src="images/icn_edit.png" /></a>
 				<a target="_blank" href="http://www.addthis.com/bookmark.php?url=' . $link . '&title=' . $text . '&description=' . $description . '"><img src="images/icn_jump_back.png" /></a>
 			</td> 
 		</tr>';
@@ -96,26 +101,37 @@
 		return $complete_template;
 		}
 
-	function show_new_link_form(){
+	function show_link_form($id=false){
+		$header_text = '{{STRING_NEW_LINK}}';
+		// get parameters from file line
+		if ($id != false){
+			$linklist = fopen('link.list', 'r');
+			$linklistdim = filesize('link.list');
+			$complete_linklist = fread($linklist, $linklistdim);
+			$links = explode("\n", $complete_linklist);
+			$link =  explode('|', $links[$id - 1]);
+			$header_text = 'EDIT LINK';
+			}
 		$content = '<article class="module width_full">
 			<form name="new_link" method="POST" action=".">
-			<header><h3>{{STRING_NEW_LINK}}</h3></header>
+			<header><h3>' . $header_text . '</h3></header>
 				<div class="module_content">
+							<input type="hidden" name="old_id" value="' . $id . '">
 							<fieldset>
 								<label>URL</label>
-								<input type="text" name="url">
+								<input type="text" name="url" value="' . $link[0] . '">
 							</fieldset>
 							<fieldset>
 								<label>{{STRING_NAME}}</label>
-								<input type="text" name="name">
+								<input type="text" name="name" value="' . $link[1] . '">
 							</fieldset>
 							<fieldset>
 								<label>{{STRING_DESCRIPTION}}</label>
-								<textarea name="description" rows="12"></textarea>
+								<textarea name="description" rows="12">' . $link[2] . '</textarea>
 							</fieldset>
 							<fieldset>
 								<label>Tags ({{STRING_SEPARATED_BY_COMMA}})</label>
-								<input type="text" name="tags">
+								<input type="text" name="tags" value="' . $link[3] . '">
 							</fieldset>
 						<div class="clear"></div>
 				</div>
@@ -178,18 +194,32 @@
 
 	// Show the new link form
 	if (isset($_GET['new'])){
-		$content .= show_new_link_form();
+		$content .= show_link_form();
+		echo $content;
+		return;
+		}
+		
+	// Show the edit link form
+	if (isset($_GET['edit'])){
+		$content .= show_link_form($_GET['edit']);
 		echo $content;
 		return;
 		}
 
 	// Create the new link line in link list
 	if (isset($_POST) && $_POST['name'] != ''){
+		// Create new link
 		$handle = fopen('link.list', 'a+');
 		$data = "\n" . $_POST['url'] . '|' . $_POST['name'] . '|' . $_POST['description'] . '|' . $_POST['tags'];
 		fwrite($handle, $data);
 		fclose($handle);
-		$message .= '<h4 class="alert_success">Link for ' . $_POST['name'] . ' created</h4>';
+		$partial_message = 'created';
+		// delete old id if is an edit line
+		if ($_POST['old_id'] != false) {
+			cutline('link.list', $_POST['old_id']);
+			$partial_message = 'edited';
+			}
+		$message .= '<h4 class="alert_success">Link for ' . $_POST['name'] . ' ' . $partial_message . '</h4>';
 		unset($_POST);
 		}
 
@@ -237,7 +267,7 @@
 		return;
 	} else {
 		$linklist = fopen('link.list', 'x');
-		$content .= show_new_link_form();
+		$content .= show_link_form();
 		echo $content;
 		return;
 	}
