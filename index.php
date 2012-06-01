@@ -66,7 +66,7 @@
 		$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
 		$valid_langs = array('en','es','fr','it');
 		$file_dict = 'class/lang/' . $lang . '.php';
-		if ( !(file_exists($file_dict)) || !(in_array($lang, $valid_langs))) {
+		if ( !(in_array($lang, $valid_langs) || !(file_exists($file_dict))) {
 			$file_dict = 'class/lang/en.php';
 		}
 		include_once $file_dict;
