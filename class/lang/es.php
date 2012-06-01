@@ -1,21 +1,18 @@
 <?php
 
- 
 $DICT = array(
-  'Administration' => 'Administracion',
+  'Administration' => 'Administración',
   'Administrator' => 'Administrador',
-  'DeveloperSite' => 'Sitio de Desarrolladores',
-  'LinkList' => 'Lista de links',
-  'CreateList' => 'Crear Link',
-  'Description' => 'Descricion',
-  'Action' => 'Accion',
+  'DeveloperSite' => 'Desarrollador',
+  'LinkList' => 'Listar links',
+  'CreateList' => 'Crear lista',
+  'Description' => 'Descripción',
+  'Action' => 'Acciones',
   'Support' => 'Soporte',
   'User' => 'Usuario',
   'Name' => 'Nombre',
-  'SeparatedByComma' => 'Separadao por coma',
+  'SeparatedByComma' => 'Separados por coma',
   'Save' => 'Guardar',
   'NewLink' => 'Nuevo link',
-  'ChangeApiCode' => 'Por favor, por su seguidad cambie su código de API'
+  'ChangeApiCode' => 'Atencion por razones de seguidad modifique el código de la API'
 );
-
-?>
