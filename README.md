@@ -9,7 +9,7 @@ With PHPersonalBookmarks you can:
 * Sort link by name, description or tags
 * Show site in a modal box
 * Share link with your friend on a lot of social network
-* Traslated: Italian, English
+* Traslated: Italian, English, Franch, Spanish
 
 Follow the project on Diaspora* or the developer's blog
 
