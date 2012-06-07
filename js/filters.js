@@ -20,11 +20,11 @@ $(function() {
 		filter($(this).val(),3);
 	});
 	// filter inline to descriptions
-	$('input[name="filter_description"]').keypress(function() {
+	$('input[name="filter_description"]').keyup(function() {
 		filter($(this).val(),2);
 	});
 	// filter inline to URL
-	$('input[name="filter_url"]').keypress(function() {
+	$('input[name="filter_url"]').keyup(function() {
 		filter($(this).val(),1);
 	});
 });
