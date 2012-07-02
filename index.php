@@ -151,7 +151,7 @@
 			<header><h3 class="tabs_involved">Links</h3>
 			</header>
 			<div class="tab_container">
-				<div id="tab1" class="tab_content">
+				<div id="tab_container_table" class="tab_content">
 				<form name="filter" method="GET" action=".">
 				<table class="tablesorter" cellspacing="0">
 				<thead>
@@ -174,7 +174,7 @@
 				<tbody> ' . $content_link . '</tbody> 
 				</table>
 				</form>
-				</div><!-- end of #tab1 -->
+				</div><!-- end of #tab_container_table -->
 			</div><!-- end of .tab_container -->
 		</article><!-- end of content manager article -->';
 		return show_template($internal_content);
